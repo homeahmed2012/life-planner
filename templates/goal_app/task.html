@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block main_body %}
+<div class="container">
+    <div class="jumbotron" style="margin-top: 10px;">
+        <h1 style="text-align:right;">{{ task.title }}</h1>
+        <br>
+        <pre style="text-align:right;">{{ task.description }}</pre>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                الوقت الكلى
+                <span class="badge badge-primary badge-pill">{{ task.duration }}</span>
+            </div>
+            <br />
+            <div class="col-md-4">
+                التاريخ
+                <span class="badge badge-primary badge-pill">{{ task.day }}</span>
+            </div>
+            <br />
+            <div class="col-md-4">
+                تتبع هدف
+                <span class="badge badge-primary badge-pill">{{ goal_name }}</span>
+            </div>
+            <br />
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <a class="btn btn-primary" href="{% url 'update_task' task.id %}">Update</a>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-primary" href="{% url 'delete_task' task.id %}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block main_body %}
+<div class="container">
+    <div class="jumbotron" style="margin-top: 10px;">
+        <h1 style="text-align:right;">{{ goal.title }}</h1>
+        <br>
+        <pre style="text-align:right;">{{ goal.description }}</pre>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                الوقت الكلى
+                <span class="badge badge-primary badge-pill">{{ goal.total_time }}</span>
+            </div>
+            <br />
+            <div class="col-md-4">
+                الوقت المنقضى
+                <span class="badge badge-primary badge-pill">{{ goal.total_spend }}</span>
+            </div>
+            <br />
+            <div class="col-md-4">
+                تاريخ الانتهاء
+                <span class="badge badge-primary badge-pill">{{ goal.finished_at }}</span>
+            </div>
+            <br />
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <a class="btn btn-primary" href="{% url 'update_goal' goal.id %}">Update</a>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-primary" href="{% url 'delete_goal' goal.id %}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
