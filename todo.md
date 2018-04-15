@@ -113,6 +113,7 @@
 * handel user login and logout
 * create form for (goal, task, report, question, use)
 * handel update and delete for each prev item
+
 * add choices to type and maybe colors
 * add validation to forms
 * some filters and queries to show data in good form.

@@ -16,10 +16,10 @@ def all_goals(request):
 @login_required
 def create_goal(request):
     form = GoalForm()
+    user = request.user
 
     if request.method == 'POST':
         form = GoalForm(request.POST)
-        user = request.user
         if form.is_valid():
             goal = form.save(commit=False)
             goal.user = user
@@ -28,6 +28,7 @@ def create_goal(request):
         else:
             print('form is not valid')
 
+    form.fields['parent'].queryset = Goal.objects.filter(user=user.id)
     return render(request, 'goal_app/create_goal.html', {'form': form})
 
 
@@ -60,7 +61,7 @@ def update_goal(request, goal_id):
             return redirect('read_goal', goal.id)
         else:
             print('form is not valid')
-
+    form.fields['parent'].queryset = Goal.objects.filter(user=user.id)
     return render(request, 'goal_app/create_goal.html', {'form': form})
 
 
@@ -85,10 +86,10 @@ def all_tasks(request):
 @login_required
 def create_task(request):
     form = TaskForm()
+    user = request.user
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
-        user = request.user
 
         if form.is_valid():
             task = form.save(commit=False)
@@ -102,6 +103,7 @@ def create_task(request):
         else:
             print('form is not valid')
 
+    form.fields['goal'].queryset = Goal.objects.filter(user=user.id)
     return render(request, 'goal_app/create_task.html', {'form': form})
 
 
@@ -141,6 +143,7 @@ def update_task(request, task_id):
         else:
             print('form is not valid')
 
+    form.fields['goal'].queryset = Goal.objects.filter(user=user.id)
     return render(request, 'goal_app/create_task.html', {'form': form})
 
 
