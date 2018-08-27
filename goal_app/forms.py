@@ -1,5 +1,5 @@
 from django import forms
-from goal_app.models import Goal, Task
+from goal_app.models import Goal, Task, Comment
 from django.utils.translation import gettext_lazy as _
 
 
@@ -10,22 +10,19 @@ class GoalForm(forms.ModelForm):
             'rows': '6'
         }
     ), label='التفاصيل')
-    finished_at = forms.DateTimeField(widget=forms.DateTimeInput(
-        attrs={
-            'class': 'form-control',
-            'position': 'relative'
-        }
-    ), label='ينتهى فى ')
+    date = forms.DateField(widget=forms.DateInput(), label='تاريخ الانتهاء')
+
+    time = forms.CharField(widget=forms.TimeInput(), label='الوقت')
 
     class Meta:
         model = Goal
-        exclude = ['user', 'picture', 'tags']
+        exclude = ['user', 'picture', 'tags', 'finished_at', 'is_done']
+        fields = ['title', 'description', 'total_time', 'total_spend',
+                  'date', 'time', 'parent', 'goal_type']
         labels = {
             'title': _('الهدف '),
             'total_time': _('الوقت الكلى بالساعات '),
             'total_spend': _('الوقت المنقضى '),
-            'is_done': _('تم انجازه '),
-            'finished_at': _('ينتهى فى '),
             'parent': _('يتبع هدف ')
         }
 
@@ -38,20 +35,29 @@ class TaskForm(forms.ModelForm):
         }
     ), label='التفاصيل')
 
+    date = forms.DateField(widget=forms.DateInput(), label='التاريخ')
+    t_time = forms.CharField(widget=forms.TimeInput(), label='الوقت')
+
     class Meta:
         model = Task
         exclude = ['user',
                    'interval_form',
                    'interval_to',
                    'tags',
-                   'day']
+                   'day',
+                   'time']
+        fields = ['title', 'description', 'date', 't_time',
+                  'duration', 'goal', 'task_type']
         labels = {
             'title': _('المهمة'),
-            'time': _('الوقت'),
             'duration': _('المدة بالدقائق'),
             'goal': _('يتبع هدف')
         }
 
 
+class CommentForm(forms.ModelForm):
 
+    class Meta:
+        model = Comment
+        fields = ['content']
 

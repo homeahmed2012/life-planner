@@ -117,9 +117,13 @@
 * add choices to type and maybe colors
 * add validation to forms
 * some filters and queries to show data in good form.
+* use react as front end framework
+* user react calendar to view month, week, and day.
+* make chorme extension for timer and logger and add tasks
+
+
 * add comments and docs
 * test all scenarios of the app
-* deploy the app
 * add more features
 
 

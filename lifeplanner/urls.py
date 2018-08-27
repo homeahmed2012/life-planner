@@ -22,4 +22,5 @@ urlpatterns = [
     path('goal/', include('goal_app.urls')),
     path('day/', include('day_app.urls')),
     path('user/', include('user_app.urls')),
+    path('api/' include('api_app.urls')),
 ]

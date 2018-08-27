@@ -18,7 +18,7 @@ class Goal(models.Model):
     description = models.TextField()
     total_time = models.IntegerField()
     total_spend = models.IntegerField(default=0)
-    is_done = models.BooleanField(default=False)
+    is_done = models.BooleanField(default=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     finished_at = models.DateTimeField(default=datetime.datetime.now, null=True, blank=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
