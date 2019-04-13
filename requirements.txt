@@ -20,7 +20,6 @@ gunicorn==19.9.0
 hyperlink==18.0.0
 idna==2.7
 incremental==17.5.0
-mod-wsgi==4.6.5
 mysqlclient==1.4.1
 Pillow==5.2.0
 psycopg2==2.7.5
