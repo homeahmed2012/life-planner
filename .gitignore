@@ -1,5 +1,6 @@
 lifeplanner/static
 lifeplanner/media
+lifeplanner/__pycache__/
 *$py.class
 
 
