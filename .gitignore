@@ -1,0 +1,15 @@
+__pycache__/
+*$py.class
+
+
+# C extensions
+*.so
+
+*.sqlite3
+media/
+*.pyc
+*.db
+
+datadump.json
+
+.idea/*

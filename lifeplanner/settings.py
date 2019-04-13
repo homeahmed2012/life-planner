@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-
+import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -32,7 +32,10 @@ SECRET_KEY = '#_^t2pl63rhst6^he9ns7=whe@^uzpkor88e6y@u575ehyyf--'
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.102',
-                 '127.0.0.1']
+                 '127.0.0.1',
+                 '192.168.1.104',
+                 '192.168.1.101',
+                 '192.168.1.107']
 
 
 # Application definition
@@ -69,7 +72,7 @@ ROOT_URLCONF = 'lifeplanner.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, ],
+        'DIRS': [TEMPLATE_DIR, os.path.join(BASE_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,9 +92,17 @@ WSGI_APPLICATION = 'lifeplanner.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'planner',
+        'USER': 'planneruser',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -142,7 +153,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [STATIC_DIR, ]
+STATICFILES_DIRS = [STATIC_DIR, os.path.join(BASE_DIR, 'build')]
 
 
 # MEDIA
@@ -151,3 +162,7 @@ MEDIA_URL = '/media/'
 
 
 LOGIN_URL = 'user_app/user_login'
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
