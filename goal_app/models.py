@@ -15,12 +15,12 @@ class Tag(models.Model):
 
 class Goal(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField()
-    total_time = models.IntegerField()
+    description = models.TextField(null=True, blank=True)
+    total_time = models.IntegerField(null=True, blank=True)
     total_spend = models.IntegerField(default=0)
     is_done = models.BooleanField(default=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    finished_at = models.DateTimeField(default=datetime.datetime.now, null=True, blank=True)
+    finished_at = models.DateTimeField(null=True, blank=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     goal_type = models.CharField(max_length=1, default='a')
@@ -33,16 +33,16 @@ class Goal(models.Model):
 
 class Task(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     time = models.DateTimeField(default=datetime.datetime.now, null=True, blank=True)
-    duration = models.IntegerField()
+    duration = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     day = models.ForeignKey(Day, on_delete=models.CASCADE, blank=True)
     task_type = models.CharField(max_length=1, default='a')
-    interval_form = models.DateTimeField(null=True, blank=True, default=datetime.datetime.now)
-    interval_to = models.DateTimeField(null=True, blank=True, default=datetime.datetime.now)
+    interval_form = models.DateTimeField(null=True, blank=True)
+    interval_to = models.DateTimeField(null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):

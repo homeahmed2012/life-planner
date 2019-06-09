@@ -38,7 +38,10 @@ class GoalViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
 
     def get_queryset(self):
-        return Goal.objects.filter(user=self.request.user, parent__isnull=True).order_by('-created_at')
+        if self.request.query_params.get('main'):
+            return Goal.objects.filter(user=self.request.user, parent__isnull=True).order_by('-created_at')
+
+        return Goal.objects.filter(user=self.request.user).order_by('-created_at')
 
 
 class TaskViewSet(viewsets.ModelViewSet):
