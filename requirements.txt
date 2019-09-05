@@ -14,7 +14,7 @@ dj-database-url==0.5.0
 Django==2.1.11
 django-cors-headers==2.4.0
 django-heroku==0.3.1
-djangorestframework==3.8.2
+djangorestframework==3.9.1
 djangorestframework-jwt==1.11.0
 gunicorn==19.9.0
 hyperlink==18.0.0
